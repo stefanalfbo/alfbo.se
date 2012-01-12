@@ -1,0 +1,85 @@
+
+html, body {
+    text-align: left;
+    font-size: 16px;
+    font-family: "Segoe UI", Arial, Verdana, Helvetica, Sans-Serif;
+    color: #4A4A4A;
+}
+
+.header {
+    position: relative;
+    width: 950px;
+    margin-right: auto;
+    margin-left: auto;
+    min-height: 100px;
+    border-bottom: solid 1px #D9E0E3;
+}
+
+.logo {
+    position: absolute;
+    top: 15px;
+    display: block;
+    height: 60px;
+    width: 220px;
+    text-decoration: none;
+    font-size: 36px;
+    background-color: #EC2819;
+    color: #FFF;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.logo span {
+    display: block;
+    font-size: 12px;
+    margin-left: 20px;
+}
+
+.main {
+    position: relative;
+    width: 950px;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.sidebar {
+    width: 270px;
+    float: right;
+    clear: both;
+    display: block;
+    overflow: hidden;
+    min-height:200px;
+    text-align: left;
+    font-size:12px;
+}
+
+.sidebar h1 {
+    font-size: 14px;
+}
+
+.sidebar li {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.content {
+    width: 660px;
+    border-right: solid 1px #D9E0E3;
+    padding-right: 10px;
+}
+
+.post h1 {
+    font-size:24px;
+}
+.date {
+    padding-top:5px;
+    width: 180px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.tags {
+    margin-top: 15px;
+    color: #EC2819;
+}
