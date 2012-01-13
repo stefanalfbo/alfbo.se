@@ -83,3 +83,7 @@ html, body {
     margin-top: 15px;
     color: #EC2819;
 }
+
+img {
+    border: none;
+}
