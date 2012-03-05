@@ -48,13 +48,28 @@
 				</ul>
 				
 				<h1>tags</h1>
-				beginning blog
+				beginning blog memo memoization F# functional
 			</div>
 			
 			<div class="content">
 				<div class="post">
-					<h1>time to start my blog</h1>
+					<h1>memoization</h1>
+<div class="date">Monday, Mars 5, 2012</div>
+<p>This technique feels like it's mandatory to describe if you are writing a book about functional programming. That might be because it emphasize the side effect free property of languages in this genre. However this technique can be used in a imperative language as well.</p>
+<p>So what is memoization? I would sum it up as an optimization technique to cache calculations done by a function in run-time.</p>
+<p>The beauty with side effect free functions is that with the same input we will always receive the same result no matter when/where we call it. This make it very easy to store the calculated result into a dictionary and use it at a later time.</p>
+<p>Lets show the memoization in action with a simple example in F#:</p>
+<script src="https://gist.github.com/1944805.js?file=memoization_simple.fs"></script>
+<p>This memoization function works fine in this simple case, however we would get in trouble if it were a recursive function that we wanted to memoize. The solution for a recursive function might be good material for a part two post	 of the memoization function :-)</p>
+<p>If you would like to find out more about this technique I recommend you to search the net on these keywords: memoization, memo and memoised function.</p>
+<p>Finally the memoization technique where "invented" by Professor Donald Michie, ["'Memo' functions: and machine learning", Donald Michie, Nature, 218, 19-22, 1968]. Here is his site: <a href='http://www.aiai.ed.ac.uk/~dm/dm.html'>Donald Michie Home Page</a></p>
+					
+					<div class="tags">tags: memo, memoization, F#, functional</div>
 
+				</div>
+				<div class="post">
+					<h1>time to start my blog</h1>
+					<div class="date">Thursday, January 12, 2012</div>
 					<p>Better sooner than later, I guess.</p>
 
 					<p>I have decided to drop wordpress as my choice of blog engine and going to create my own from scratch instead. This first version will be a simple static page, but will hopefully evolve to something better in the future. The source code will of course be available on github.</p>
@@ -63,7 +78,7 @@
 
 					<p>So... lets start blogging.</p>
 					
-					<div class="date">Thursday, January 12, 2012</div>
+
 					<div class="tags">tags: beginning, blog</div>
 					
 				</div>
