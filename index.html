@@ -18,6 +18,73 @@
 		  })();
 
 		</script>
+		<script type="text/javascript">
+			// DISQUS vars.
+			var disqus_shortname = 'alfbo';
+			var disqus_identifier = '';
+			var disqus_url = '';
+			var disqus_developer = 1; // developer mode is on
+			
+			// Leave a comment/cancel.
+			$('.entry a.comment').click(function ()
+			{
+			  // Firefox? Bad firefox.
+			  if ($.browser.mozilla && window.disqus_loaded)
+			  {
+			    return true;
+			  }
+
+			  // Init DISQUS.
+			  disqus_identifier = $(this).data('disqus-identifier');
+			  disqus_url = $(this).attr('href');
+
+			  // DISQUS requires each thread to have the ID #disqus_thread.
+			  $entry = $(this).parents('div.entry');
+			  $('#disqus_thread').removeAttr('id');
+			  $entry.find('div.disqus_thread').attr('id', 'disqus_thread');
+
+			  // Load DISQUS script, if not already loaded.
+			  if ($entry.find('div.disqus_thread .dsq-reply').length == 0)
+			  {
+			    $.getScript('http://'+disqus_shortname+'.disqus.com/embed.js',
+			      function ()
+			      {
+			        window.disqus_interval =
+			        setInterval('is_disqus_loaded("'+$entry.attr('id')+'")',
+			          200);
+			      }
+			    );
+			  }
+
+			  // Hide/kill other DISQUS forums.
+			  $entry.find('a.nocomment').trigger('click');
+			  $(this).find('span').addClass('loading');
+			  return false;
+			    
+			});
+
+			// Hide/kill all open DISQUS forums.
+			$('.entry a.nocomment').click(function ()
+			{
+			  $('div.comments').slideUp('normal',
+			    function () { $(this).find('.disqus_thread').empty(); });
+			  $('p.comment').slideDown();
+			  return false;
+			});
+
+			function is_disqus_loaded (entry_id)
+			{
+			  $entry = $('#'+entry_id);
+			  if ($entry.find('div.disqus_thread .dsq-reply').length)
+			  {
+			    clearInterval(window.disqus_interval);
+			    window.disqus_loaded = true;
+			    $entry.find('div.comments').slideDown();
+			    $entry.find('a.comment span').removeClass('loading');
+			    $entry.find('p.comment').slideUp();
+			  }
+			}
+		</script>
 	</head
 	
 	<body>
@@ -48,24 +115,38 @@
 				</ul>
 				
 				<h1>tags</h1>
-				beginning blog memo memoization F# functional
+				beginning blog memo memoization F# functional pipeline operator
 			</div>
 			
 			<div class="content">
 				<div class="post">
+					<h1>pipeline operator in F#</h1>
+					<div class="date">Monday, Mars 27, 2012</div>
+					<p>First time I came in contact with a pipeline operator was on the linux command shell (bash) several years ago. It amazed me how powerful this little operator could be to compose more complicated commands.</p>
+					<p>The great thing is that there is a similar powerful operator available in F#, and you will see it appear often in F# code.</p>
+					<p>The pipeline operator looks like this in F#, |>, there are actually several other variants of the operator which we will see later. Here are some simple examples how to use it:</p>
+					<script src="https://gist.github.com/2218950.js?file=Simple%20examples%20of%20pipeline%20operator"></script>
+					<p>As I mentioned earlier there are other variants that we can use depending on our situation. We have, <|, ||>, <|| and more. Hopefully the examples below will clarify how they work.</p>
+					<script src="https://gist.github.com/2219058.js?file=more%20simple%20pipeline%20operator%20examples.fs"></script>
+					<p>F# is open source and the code is hosted on github, so we can dig into the code and see how these operators are implemented.</p>
+					<p>Here is the url to the repository: <a href="https://github.com/fsharp/fsharp">github.com/fsharp/fsharp</a>. The file we are interested in is the prim-types.fs and is located in <b>fsharp/src/fsharp/FSharp.Core</b> directory, look around line 3492 to find the things we want.</p>
+					<script src="https://gist.github.com/2219106.js?file=extract%20from%20fsharp%20repository.fs"></script>
+					<p>Yes, it's concise, beautiful and simple, as always in F# ;-)</p>
+					<div class="tags">tags: F#, pipeline operator</div>
+				</div>
+				<div class="post">
 					<h1>memoization</h1>
-<div class="date">Monday, Mars 5, 2012</div>
-<p>This technique feels like it's mandatory to describe if you are writing a book about functional programming. That might be because it emphasize the side effect free property of languages in this genre. However this technique can be used in a imperative language as well.</p>
-<p>So what is memoization? I would sum it up as an optimization technique to cache calculations done by a function in run-time.</p>
-<p>The beauty with side effect free functions is that with the same input we will always receive the same result no matter when/where we call it. This make it very easy to store the calculated result into a dictionary and use it at a later time.</p>
-<p>Lets show the memoization in action with a simple example in F#:</p>
-<script src="https://gist.github.com/1944805.js?file=memoization_simple.fs"></script>
-<p>This memoization function works fine in this simple case, however we would get in trouble if it were a recursive function that we wanted to memoize. The solution for a recursive function might be good material for a part two post	 of the memoization function :-)</p>
-<p>If you would like to find out more about this technique I recommend you to search the net on these keywords: memoization, memo and memoised function.</p>
-<p>Finally the memoization technique where "invented" by Professor Donald Michie, ["'Memo' functions: and machine learning", Donald Michie, Nature, 218, 19-22, 1968]. Here is his site: <a href='http://www.aiai.ed.ac.uk/~dm/dm.html'>Donald Michie Home Page</a></p>
+					<div class="date">Monday, Mars 5, 2012</div>
+					<p>This technique feels like it's mandatory to describe if you are writing a book about functional programming. That might be because it emphasize the side effect free property of languages in this genre. However this technique can be used in a imperative language as well.</p>
+					<p>So what is memoization? I would sum it up as an optimization technique to cache calculations done by a function in run-time.</p>
+					<p>The beauty with side effect free functions is that with the same input we will always receive the same result no matter when/where we call it. This make it very easy to store the calculated result into a dictionary and use it at a later time.</p>
+					<p>Lets show the memoization in action with a simple example in F#:</p>
+					<script src="https://gist.github.com/1944805.js?file=memoization_simple.fs"></script>
+					<p>This memoization function works fine in this simple case, however we would get in trouble if it were a recursive function that we wanted to memoize. The solution for a recursive function might be good material for a part two post	 of the memoization function :-)</p>
+					<p>If you would like to find out more about this technique I recommend you to search the net on these keywords: memoization, memo and memoised function.</p>
+					<p>Finally the memoization technique where "invented" by Professor Donald Michie, ["'Memo' functions: and machine learning", Donald Michie, Nature, 218, 19-22, 1968]. Here is his site: <a href='http://www.aiai.ed.ac.uk/~dm/dm.html'>Donald Michie Home Page</a></p>
 					
 					<div class="tags">tags: memo, memoization, F#, functional</div>
-
 				</div>
 				<div class="post">
 					<h1>time to start my blog</h1>
@@ -92,4 +173,4 @@
 		</footer>
 	</body>
 
-</html>
+</html>	
