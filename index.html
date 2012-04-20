@@ -18,73 +18,6 @@
 		  })();
 
 		</script>
-		<script type="text/javascript">
-			// DISQUS vars.
-			var disqus_shortname = 'alfbo';
-			var disqus_identifier = '';
-			var disqus_url = '';
-			var disqus_developer = 1; // developer mode is on
-			
-			// Leave a comment/cancel.
-			$('.entry a.comment').click(function ()
-			{
-			  // Firefox? Bad firefox.
-			  if ($.browser.mozilla && window.disqus_loaded)
-			  {
-			    return true;
-			  }
-
-			  // Init DISQUS.
-			  disqus_identifier = $(this).data('disqus-identifier');
-			  disqus_url = $(this).attr('href');
-
-			  // DISQUS requires each thread to have the ID #disqus_thread.
-			  $entry = $(this).parents('div.entry');
-			  $('#disqus_thread').removeAttr('id');
-			  $entry.find('div.disqus_thread').attr('id', 'disqus_thread');
-
-			  // Load DISQUS script, if not already loaded.
-			  if ($entry.find('div.disqus_thread .dsq-reply').length == 0)
-			  {
-			    $.getScript('http://'+disqus_shortname+'.disqus.com/embed.js',
-			      function ()
-			      {
-			        window.disqus_interval =
-			        setInterval('is_disqus_loaded("'+$entry.attr('id')+'")',
-			          200);
-			      }
-			    );
-			  }
-
-			  // Hide/kill other DISQUS forums.
-			  $entry.find('a.nocomment').trigger('click');
-			  $(this).find('span').addClass('loading');
-			  return false;
-			    
-			});
-
-			// Hide/kill all open DISQUS forums.
-			$('.entry a.nocomment').click(function ()
-			{
-			  $('div.comments').slideUp('normal',
-			    function () { $(this).find('.disqus_thread').empty(); });
-			  $('p.comment').slideDown();
-			  return false;
-			});
-
-			function is_disqus_loaded (entry_id)
-			{
-			  $entry = $('#'+entry_id);
-			  if ($entry.find('div.disqus_thread .dsq-reply').length)
-			  {
-			    clearInterval(window.disqus_interval);
-			    window.disqus_loaded = true;
-			    $entry.find('div.comments').slideDown();
-			    $entry.find('a.comment span').removeClass('loading');
-			    $entry.find('p.comment').slideUp();
-			  }
-			}
-		</script>
 	</head
 	
 	<body>
@@ -157,8 +90,7 @@
 
 					<p>My initial goal with this blog is at least to publish a post each month, but we will see.</p>
 
-					<p>So... lets start blogging.</p>
-					
+					<p>So... lets start blogging.</p>					
 
 					<div class="tags">tags: beginning, blog</div>
 					
